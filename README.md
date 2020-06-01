@@ -14,6 +14,10 @@ Authors: [David Furrer](https://github.com/davidfurrer) and [Adrian Imfeld](http
 
 *Figure 1: Demonstration of the interactivity of the autocomplete tool prototype*
 
+![clustering](img/clustering.png)
+
+*Figure 2: Identified job title clusters based on BERT embeddings. [Interacitve version](https://davidfurrer.github.io/bokeh-recommendation-app/) to inspect the individual job titles.*
+
 
 ## Jobcloud's project description
 
