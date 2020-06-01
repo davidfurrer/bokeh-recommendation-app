@@ -1,21 +1,19 @@
 # bokeh-recommendation-app
 
+## What is in this repo?
+
+This repo contains the parts we can share of the final project we did at Propulsion Academy (Data Science Bootcamp) in colaboration with jobcloud (owner of jobs.ch). 
+
 [Propulsion Academy](https://propulsion.academy/) Final Project DSWD-2019-03
 
 Title: Optimizing job ad titles at Jobcloud using Google BERT and neural networks
 
 Authors: [David Furrer](https://github.com/davidfurrer) and [Adrian Imfeld](https://github.com/aimfeld)
 
-## Remarks on data
+![screenshot app](img/app_gif.gif)
 
-We cannot share the data that was provided by jobcloud, but we can share our approach, the bokeh app code and some general findings.
+*Figure 1: Demonstration of the interactivity of the autocomplete tool prototype*
 
-## Install
-
-- `git clone` this repo
-- Set up the provided Anaconda virtual environment (jobcloud) which includes the needed packages with the right versions: `conda env create -f environment.yml`
-- Activate the jobcloud environment: `conda activate jobcloud`
-- Run `jupyter lab` and open the provided notebooks.
 
 ## Jobcloud's project description
 
@@ -31,6 +29,11 @@ as the title is being entered.
 ## Our approach
 
 This chapter gives a quick overview of our process. For details, see the linked notebooks at the beginning of the chapters.
+
+
+## Remarks on data
+
+We cannot share the data that was provided by jobcloud, but we can share our approach, the bokeh app code and some general findings.
 
 ### Data exploration
 
@@ -98,6 +101,7 @@ Our models predict about a third of the variance in view count, which means that
 
 ### Clustering
 
+[Bokeh clustering plot](https://davidfurrer.github.io/bokeh-recommendation-app/)
 
 In order to see if the bert embeddings successfully represent the semantic meaning of the job titles, we run a clustering algorithm on the embeddings: 
 
@@ -130,10 +134,13 @@ The BERT embeddings and the inputs chosen from the dropdown menues are then fed 
 
 ![flow chart app](img/flow_chart_app.png)
 
-*Figure 1: Flow chart showing how the autocomplete tool prototype works*
+*Figure 2: Flow chart showing how the autocomplete tool prototype works*
 
 The gif below shows how the autocomplete tool looks like in action:
 
-![screenshot app](img/app_gif.gif)
+## Install
 
-*Figure 2: Demonstration of the interactivity of the autocomplete tool prototype*
+- `git clone` this repo
+- Set up the provided Anaconda virtual environment (jobcloud) which includes the needed packages with the right versions: `conda env create -f environment.yml`
+- Activate the jobcloud environment: `conda activate jobcloud`
+- Run `jupyter lab` and open the provided notebooks.
