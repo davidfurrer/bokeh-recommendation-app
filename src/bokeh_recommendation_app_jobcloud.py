@@ -104,50 +104,46 @@ def predict_views_from_string(string_input = None,
                               city='Zürich',
                               industry_name='Industrie diverse'):
     
-    if string_input_embedding == None:
+    if string_input_embedding is None:
 
         month = datetime.datetime.now().strftime('%B')
         title_num_words = len(string_input.split())
         title_aggressive = (string_input.isupper()) | ('!' in string_input)
-        
+
         if re.compile(r'((m/w)|(w/m)|(m/f)|(h/f)|/ -in|/in|\(in\))').search(string_input):
             title_female = True
         else: 
             title_female = False
-        
+
         title_percent = '%' in string_input
-        
+
         if re.compile(r'(\bRegion\b|\bBezirk\b|\bStadt\b|\bOrt\b)').search(string_input):
             title_location = True
         else: 
             title_location = False
-        
+
         if re.compile(r'(Dipl\.|Diplom|PhD|MSc|\bUni\b|\bFH\b|\bETH\b|\bTU\b)').search(string_input):
             title_diploma = True
         else: 
             title_diploma = False
-        
-        if re.compile(r'\bC.O\b').search(string_input):
-            title_chief = True
-        else: 
-            title_chief = False  
-        
+
+        title_chief = True if re.compile(r'\bC.O\b').search(string_input) else False
         lang_dict = {'en': 0, 'de':0, 'fr':0}
         for lang_input in detect_langs(string_input):
-            if lang_input.lang in lang_dict.keys():
+            if lang_input.lang in lang_dict:
                 lang_dict[lang_input.lang] = lang_input.prob
-        
+
         title_prob_en = lang_dict['en']
         title_prob_de = lang_dict['de']
         title_prob_fr = lang_dict['fr']
 
 
         string_input = get_clean_title(string_input)
-        
+
         titles_embeddings = bert_embedding([string_input, '_'])
         string_input_embedding = np.mean( np.array(titles_embeddings[0][1]), axis=0 )
-    
-    
+
+
         df_input_string =    pd.DataFrame([[contract_pct_from, contract_pct_to, month, package_id, industry_name, 
                             city, title_num_words, title_aggressive, title_female, title_percent,
                             title_location, title_diploma, title_chief, title_prob_en,
@@ -165,7 +161,7 @@ def predict_views_from_string(string_input = None,
         df_input_string['city'] = city
         df_input_string['month'] = datetime.datetime.now().strftime('%B')
         df_input_string['industry_name'] = industry_name
-    
+
     X_input = np.concatenate((df_input_string.loc[:, features_no_cat + embeddings].values, 
                               enc.transform(df_input_string.loc[:, ['package_id', 'city', 'industry_name', 'month']]).toarray()), axis=1)
     print(round(model.predict(X_input)[0][0], 2))
